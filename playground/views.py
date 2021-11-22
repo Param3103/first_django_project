@@ -5,4 +5,4 @@ from django.http import HttpResponse
 # takes a request and returns a response, handles action
 
 def say_hello(request):
-    return render(request, 'hello.html',{'name':'Mosh'})
+    return render(request, 'hello.html',{'name':'Param'})

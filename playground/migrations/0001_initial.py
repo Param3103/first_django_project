@@ -18,6 +18,6 @@ class Migration(migrations.Migration):
                 ('name', models.TextField(max_length=2700)),
                 ('price', models.TextField(max_length=2700)),
                 ('description', models.TextField(max_length=2700)),
-            ],
+               ],
         ),
     ]

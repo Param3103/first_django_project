@@ -32,20 +32,17 @@ def thank_you(request):
     return render(request, 'thank_you.html')
 def form_view(request):
     # instantiate form object with data sent from user
-    print(request.POST)
-    form = LoginForm()
-    name = form.data.get("name")
-    age = form.data.get("age")
-    print(name)
-    if form.is_valid():  # no errors
-        # authenticate user and log them in
-        name = form.cleaned_data.get("name")
-        age = form.cleaned_data.get("age")
-        print(name,age)
-        instance = Item(name=name, age=age)
-        instance.save()
-
-    else:  # get request
-        form = LoginForm()
+    form = LoginForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():  # no errors
+            # authenticate user and log them in
+            try:
+                form.save()
+                print('saved')
+            except:
+                pass
+        else:
+            form = LoginForm()
+            print('nt saved')
 
     return render(request, 'hello.html', {'form': form})

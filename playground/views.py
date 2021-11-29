@@ -30,7 +30,7 @@ def delete(request):
     return render(request, 'hello.html', {'name': 'Charu, I got your websites code'})
 def thank_you(request):
     return render(request, 'thank_you.html')
-def form_view(request):
+def registration_page(request):
     # instantiate form object with data sent from user
     form = LoginForm(request.POST or None)
     if request.method == 'POST':
@@ -44,3 +44,5 @@ def form_view(request):
             form = LoginForm()
 
     return render(request, 'hello.html', {'form': form})
+def display_registered_users(request):
+    return render(request, "show.html", {'users': list(Item.objects.values())})

@@ -38,11 +38,9 @@ def form_view(request):
             # authenticate user and log them in
             try:
                 form.save()
-                print('saved')
             except:
                 pass
         else:
             form = LoginForm()
-            print('nt saved')
 
     return render(request, 'hello.html', {'form': form})

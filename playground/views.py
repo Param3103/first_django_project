@@ -31,13 +31,20 @@ def delete(request):
 def thank_you(request):
     return render(request, 'thank_you.html')
 def form_view(request):
-    if request.method == 'POST':  # data was sent from user
-        # instantiate form object with data sent from user
-        form = LoginForm(request.POST)
-        if form.is_valid():  # no errors
-            # authenticate user and log them in
-            # redirect to dashboard:
-            return HttpResponseRedirect('/dashboard/')
+    # instantiate form object with data sent from user
+    print(request.POST)
+    form = LoginForm()
+    name = form.data.get("name")
+    age = form.data.get("age")
+    print(name)
+    if form.is_valid():  # no errors
+        # authenticate user and log them in
+        name = form.cleaned_data.get("name")
+        age = form.cleaned_data.get("age")
+        print(name,age)
+        instance = Item(name=name, age=age)
+        instance.save()
+
     else:  # get request
         form = LoginForm()
 

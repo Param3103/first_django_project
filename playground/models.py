@@ -10,5 +10,4 @@ def filepath(request, filename):
 # Create your models here.
 class Item(models.Model):
     name = models.TextField(max_length=2700)
-    price = models.TextField(max_length=2700)
-    description = models.TextField(max_length=2700)
+    age = models.TextField(max_length=2700)

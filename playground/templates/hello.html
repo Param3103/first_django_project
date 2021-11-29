@@ -12,8 +12,8 @@
 {% endif %}
 <form action = "../thank_you/" method = "POST">
     {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Submit">
+    {{ form.as_p }}
+    <input type="Submit" value="Submit">
 </form>
 
 </body>

@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Item
+from .forms import LoginForm
+from django.http import HttpResponseRedirect
 import requests
 
 # Create your views here.
@@ -26,3 +28,17 @@ def delete(request):
     instance = Item.objects.filter(name='Raj')
     instance.delete()
     return render(request, 'hello.html', {'name': 'Charu, I got your websites code'})
+def thank_you(request):
+    return render(request, 'thank_you.html')
+def form_view(request):
+    if request.method == 'POST':  # data was sent from user
+        # instantiate form object with data sent from user
+        form = LoginForm(request.POST)
+        if form.is_valid():  # no errors
+            # authenticate user and log them in
+            # redirect to dashboard:
+            return HttpResponseRedirect('/dashboard/')
+    else:  # get request
+        form = LoginForm()
+
+    return render(request, 'hello.html', {'form': form})

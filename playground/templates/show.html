@@ -5,6 +5,8 @@
     <title>users</title>
 </head>
 <body>
-{{ users }}
+    {% for user in users %}
+          {{ user }} <br>
+    {% endfor %}
 </body>
 </html>

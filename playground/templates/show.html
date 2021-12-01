@@ -6,7 +6,7 @@
 </head>
 <body>
     {% for user in users %}
-          {{ user }} <br>
+          {{ user }}<a href = "{%  url 'delete_user' id=user.id %}">Delete</a><br>
     {% endfor %}
 </body>
 </html>

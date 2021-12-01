@@ -46,3 +46,8 @@ def registration_page(request):
     return render(request, 'hello.html', {'form': form})
 def display_registered_users(request):
     return render(request, "show.html", {'users': list(Item.objects.values())})
+
+def delete_user(request, id):
+    user = Item.objects.get(id=id)
+    user.delete()
+    return render(request, "show.html", {'users': list(Item.objects.values())})

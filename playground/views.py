@@ -51,3 +51,17 @@ def delete_user(request, id):
     user = Item.objects.get(id=id)
     user.delete()
     return render(request, "show.html", {'users': list(Item.objects.values())})
+
+def update_user(request, id):
+    user = Item.objects.get(id=id)
+    form = LoginForm(request.POST or None)
+    if request.method == 'POST':
+        if form.is_valid():  # no errors
+            # authenticate user and log them in
+            try:
+                form.save()
+            except:
+                pass
+        else:
+            form = LoginForm()
+    return render(request, "update.html", {'users': list(Item.objects.values()), 'form':form})

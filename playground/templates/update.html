@@ -8,7 +8,7 @@
     {% for user in users %}
           {{ user }}
     {% endfor %}
-    <form action = "../update/" method = "POST">
+    <form action = "  [name='update_user']" method = "POST">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="Submit" value="Submit">

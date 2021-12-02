@@ -5,13 +5,10 @@
     <title>users</title>
 </head>
 <body>
-    {% for user in users %}
-          {{ user }}
-    {% endfor %}
-    <form action = "  [name='update_user']" method = "POST">
+    <form method = "POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="Submit" value="Submit">
+        {{form.as_p}}
+        <input type="Submit" value="Update">
     </form>
 </body>
 </html>

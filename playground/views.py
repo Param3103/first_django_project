@@ -1,8 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Item
 from .forms import LoginForm
-from django.http import HttpResponseRedirect
 import requests
 
 # Create your views here.
@@ -54,14 +53,19 @@ def delete_user(request, id):
 
 def update_user(request, id):
     user = Item.objects.get(id=id)
-    form = LoginForm(request.POST or None)
     if request.method == 'POST':
+        form = LoginForm(request.POST or None, instance=user)
         if form.is_valid():  # no errors
             # authenticate user and log them in
             try:
                 form.save()
+                return(redirect('../../show/'))
             except:
                 pass
-        else:
-            form = LoginForm()
+    else:
+        form = LoginForm(instance=user)
+        context = {
+            'form': form
+        }
+        return render(request, 'update.html', context)
     return render(request, "update.html", {'users': list(Item.objects.values()), 'form':form})

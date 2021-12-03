@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import Item
 from .forms import LoginForm
 import requests
+from django.core.files.storage import FileSystemStorage
 
 # Create your views here.
 # takes a request and returns a response, handles action
@@ -69,3 +70,14 @@ def update_user(request, id):
         }
         return render(request, 'update.html', context)
     return render(request, "update.html", {'users': list(Item.objects.values()), 'form':form})
+def file_upload(request):
+    print(request)
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+        fs = FileSystemStorage()
+        filename = fs.save(myfile.name, myfile)
+        uploaded_file_url = fs.url(filename)
+        return render(request, 'file_upload.html', {
+            'uploaded_file_url': uploaded_file_url
+        })
+    return render(request, 'file_upload.html')

@@ -35,8 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.auth', # authenticating users
     'django.contrib.contenttypes',
     'django.contrib.messages', # display 1 time notifcation
-    'django.contrib.staticfiles', # images css file etc.display
+    'django.contrib.staticfiles',
+    'django.contrib.sessions', # images css file etc.display
     'playground',
+    # 'django.contrib.sessions.models.Session',
 ]
 
 MIDDLEWARE = [

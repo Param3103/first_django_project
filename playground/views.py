@@ -81,6 +81,7 @@ def file_upload(request):
         instance = File_URL(path=uploaded_file_url)
         instance.save()
         return render(request, 'file_upload.html', {
-            'uploaded_file_url': uploaded_file_url
+            'uploaded_file_url': uploaded_file_url,
+            'uploaded_file': filename,
         })
     return render(request, 'file_upload.html')

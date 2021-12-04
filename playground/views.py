@@ -1,9 +1,10 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Item
+from .models import Item,File_URL
 from .forms import LoginForm
 import requests
 from django.core.files.storage import FileSystemStorage
+import os
 
 # Create your views here.
 # takes a request and returns a response, handles action
@@ -76,7 +77,9 @@ def file_upload(request):
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
-        uploaded_file_url = fs.url(filename)
+        uploaded_file_url = os.path.abspath(fs.url(filename))
+        instance = File_URL(path=uploaded_file_url)
+        instance.save()
         return render(request, 'file_upload.html', {
             'uploaded_file_url': uploaded_file_url
         })

@@ -11,3 +11,5 @@ def filepath(request, filename):
 class Item(models.Model):
     name = models.TextField(max_length=2700)
     age = models.TextField(max_length=2700)
+class File_URL(models.Model):
+    path = models.TextField(max_length=3000)

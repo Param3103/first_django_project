@@ -85,3 +85,12 @@ def file_upload(request):
             'uploaded_file': filename,
         })
     return render(request, 'file_upload.html')
+def test_cookie(request):
+    response = HttpResponse("Visiting for the first time")
+    if not request.COOKIES.get('team'):
+        response.set_cookie('team', 'barcelona')
+        return response
+    else:
+        for cookie in request.COOKIES:
+            response.delete_cookie(cookie)
+        return HttpResponse("Your favourite team is {}".format(request.COOKIES['team']))

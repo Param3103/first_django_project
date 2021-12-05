@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from .models import Item,File_URL
-from .forms import LoginForm
+from .forms import LoginForm, URLForm
 import requests
 from django.core.files.storage import FileSystemStorage
 import os

@@ -5,10 +5,10 @@
     <title>file upload</title>
 </head>
 <body>
-<form method="post" enctype="multipart/form-data">
+<form action="../thank_you/" method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <input type="file" name="uploaded_file" />
-    <button type="submit">Upload</button>
+    <input type="file" name="uploaded_file">
+    <button type="submit" >Upload</button>
   </form>
 
   {% if uploaded_file_url %}

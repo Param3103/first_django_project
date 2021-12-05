@@ -13,3 +13,4 @@ class Item(models.Model):
     age = models.TextField(max_length=2700)
 class File_URL(models.Model):
     path = models.TextField(max_length=3000)
+    user_id = models.IntegerField(primary_key=True)

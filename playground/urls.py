@@ -11,8 +11,9 @@ urlpatterns = [
     path('show/', views.display_registered_users),
     path('delete_user/<int:id>/', views.delete_user, name="delete_user"),
     path('update_user/<int:id>/', views.update_user, name="update_user"),
-    path('file_upload/', views.file_upload),
+    path('file_upload/<int:id>/', views.file_upload),
     path('test_cookie/', views.test_cookie),
+    path('user_details/<int:id>/', views.user_details, name="user_details"),
 ]
 
 if settings.DEBUG:

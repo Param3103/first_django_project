@@ -30,7 +30,7 @@ def delete(request):
     instance.delete()
     return render(request, 'hello.html', {'name': 'Charu, I got your websites code'})
 def thank_you(request):
-    return render(request, 'thank_you.html')
+    return render(request, 'thank_you.html', {'user': list(Item.objects.values())[0]})
 def registration_page(request):
     # instantiate form object with data sent from user
     form = LoginForm(request.POST or None)
@@ -43,6 +43,7 @@ def registration_page(request):
                 pass
         else:
             form = LoginForm()
+        return redirect("../file_upload/")
 
     return render(request, 'hello.html', {'form': form})
 def display_registered_users(request):
@@ -71,14 +72,14 @@ def update_user(request, id):
         }
         return render(request, 'update.html', context)
     return render(request, "update.html", {'users': list(Item.objects.values()), 'form':form})
-def file_upload(request):
+def file_upload(request, id):
     print(request)
     if request.method == 'POST' and request.FILES['myfile']:
         myfile = request.FILES['myfile']
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = os.path.abspath(fs.url(filename))
-        instance = File_URL(path=uploaded_file_url)
+        instance = File_URL(path=uploaded_file_url, user_id=id)
         instance.save()
         return render(request, 'file_upload.html', {
             'uploaded_file_url': uploaded_file_url,
@@ -94,3 +95,6 @@ def test_cookie(request):
         for cookie in request.COOKIES:
             response.delete_cookie(cookie)
         return HttpResponse("Your favourite team is {}".format(request.COOKIES['team']))
+def user_details(request, id):
+    user = Item.objects.get(id=id)
+    return render(request, 'user_details.html',  {'users': user})

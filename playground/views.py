@@ -29,7 +29,7 @@ def delete(request):
     instance = Item.objects.filter(name='Raj')
     instance.delete()
     return render(request, 'hello.html', {'name': 'Charu, I got your websites code'})
-def thank_you(request):
+def thank_you(request, id=None):
     return render(request, 'thank_you.html')
 def registration_page(request):
     # instantiate form object with data sent from user
@@ -48,12 +48,12 @@ def registration_page(request):
 def display_registered_users(request):
     return render(request, "show.html", {'users': list(Item.objects.values())})
 
-def delete_user(request, id):
+def delete_user(request, id=None):
     user = Item.objects.get(id=id)
     user.delete()
     return render(request, "show.html", {'users': list(Item.objects.values())})
 
-def update_user(request, id):
+def update_user(request, id=None):
     user = Item.objects.get(id=id)
     if request.method == 'POST':
         form = LoginForm(request.POST or None, instance=user)
@@ -84,6 +84,11 @@ def file_upload(request):
             'uploaded_file': filename,
         })
     return render(request, 'file_upload.html')
+
+def user_info_image(request):
+    user = Item.objects.all
+
+    return render(request, 'user_info_image.html', {'user': user})
 def test_cookie(request):
     response = HttpResponse("Visiting for the first time")
     if not request.COOKIES.get('team'):

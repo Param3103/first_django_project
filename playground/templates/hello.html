@@ -10,7 +10,7 @@
 {% else %}
 <h1>Hello World</h1>
 {% endif %}
-<form action = "../show/" method = "POST">
+<form action = "../file_upload/" method = "POST">
     {% csrf_token %}
     {{ form.as_p }}
     <input type="Submit" value="Submit">

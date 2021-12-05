@@ -72,9 +72,8 @@ def update_user(request, id):
         return render(request, 'update.html', context)
     return render(request, "update.html", {'users': list(Item.objects.values()), 'form':form})
 def file_upload(request):
-    print(request)
-    if request.method == 'POST' and request.FILES['myfile']:
-        myfile = request.FILES['myfile']
+    if request.method == 'POST':
+        myfile = request.FILES.get("uploaded_file")
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = os.path.abspath(fs.url(filename))

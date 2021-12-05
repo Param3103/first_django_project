@@ -34,15 +34,13 @@ def thank_you(request, id=None):
 def registration_page(request):
     # instantiate form object with data sent from user
     form = LoginForm(request.POST or None)
-    if request.method == 'POST':
-        if form.is_valid():  # no errors
-            # authenticate user and log them in
-            try:
-                form.save()
-            except:
-                pass
-        else:
-            form = LoginForm()
+    if request.method == "POST":
+        if form.is_valid():
+            name=form.cleaned_data['name']
+            age=form.cleaned_data['age']# no errors
+            form.save()
+        instance = Item(name=name,age=age)
+        instance.save()
 
     return render(request, 'hello.html', {'form': form})
 def display_registered_users(request):

@@ -12,6 +12,7 @@ urlpatterns = [
     path('delete_user/<int:id>/', views.delete_user, name="delete_user"),
     path('update_user/<int:id>/', views.update_user, name="update_user"),
     path('file_upload/', views.file_upload),
+    path('diplay_user/<int:id>', views.file_upload),
     path('test_cookie/', views.test_cookie),
 ]
 

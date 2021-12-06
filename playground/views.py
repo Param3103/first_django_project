@@ -34,6 +34,7 @@ def thank_you(request, id=None):
 def registration_page(request):
     # instantiate form object with data sent from user
     form = LoginForm(request.POST or None)
+
     if request.method == "POST":
         if form.is_valid():
             name=form.cleaned_data['name']
@@ -41,8 +42,8 @@ def registration_page(request):
             form.save()
         instance = Item(name=name,age=age)
         instance.save()
-
     return render(request, 'hello.html', {'form': form})
+
 def display_registered_users(request):
     return render(request, "show.html", {'users': list(Item.objects.values())})
 
@@ -70,8 +71,9 @@ def update_user(request, id=None):
         return render(request, 'update.html', context)
     return render(request, "update.html", {'users': list(Item.objects.values()), 'form':form})
 def file_upload(request):
-    if request.method == 'POST' and request.FILES['uploaded_file']:
-        myfile = request.FILES['uploaded_file']
+    myfile = {'name': None}
+    if request.method == 'GET':
+        myfile = request.Get.get('uploaded_file', 1)
         fs = FileSystemStorage()
         filename = fs.save(myfile.name, myfile)
         uploaded_file_url = os.path.abspath(fs.url(filename))
@@ -79,7 +81,6 @@ def file_upload(request):
         instance.save()
         return render(request, 'file_upload.html', {
             'uploaded_file_url': uploaded_file_url,
-            'uploaded_file': filename,
         })
     return render(request, 'file_upload.html')
 

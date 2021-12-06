@@ -5,9 +5,9 @@
     <title>User images</title>
 </head>
 <body>
-{{ users }} <br>
 {% for user in users %}
-    {{ user.name }} {{ user.age }}<br>
+    name: {{ user.name }} age: {{ user.age }}<br>
+
 {% endfor %}
 
 

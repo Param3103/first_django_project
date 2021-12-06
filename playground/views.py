@@ -84,9 +84,9 @@ def file_upload(request):
     return render(request, 'file_upload.html')
 
 def user_info_image(request):
-    user = Item.objects.all
+    user = Item.objects.all()
 
-    return render(request, 'user_info_image.html', {'user': user})
+    return render(request, 'user_info_image.html', {'users': user})
 def test_cookie(request):
     response = HttpResponse("Visiting for the first time")
     if not request.COOKIES.get('team'):

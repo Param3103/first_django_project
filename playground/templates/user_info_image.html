@@ -5,11 +5,11 @@
     <title>User images</title>
 </head>
 <body>
-{{user}}
-<script>
- for(let i= 0; i<{{user}}.length; i++){
-     {{user}}[i];
-        }
-</script>
+{{ users }} <br>
+{% for user in users %}
+    {{ user.name }} {{ user.age }}<br>
+{% endfor %}
+
+
 </body>
 </html>
